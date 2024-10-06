@@ -8,6 +8,7 @@ import { auth } from "../config/firebaseConfig";
 import { ActivityIndicator } from "react-native-paper";
 import { View } from "react-native";
 import { styles } from "../theme/styles";
+import { ActualizarInfoScreen } from "../homeScreen/ActualizarInfoScreen";
 //interfaz para gestionar las rutas
 interface Rutas {
     name: string
@@ -23,6 +24,7 @@ const rutasParaNoAutenticados: Rutas[] = [
 //arreglos con rutas cuando el usuario si está registrado
 const rutasParaSiAutenticados: Rutas[] = [
     { name: 'Home', screen: HomeScreen },
+    { name: 'Update', screen: ActualizarInfoScreen}
 ];
 const Stack = createStackNavigator();
 
