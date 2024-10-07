@@ -60,7 +60,8 @@ export const LoginScreen = () => {
                 formularioLogin.correo,
                 formularioLogin.contrasenia
             );
-            console.log(response);
+            //navegar al home
+            navigation.dispatch(CommonActions.navigate({name:'Home'}))
         } catch (e) {
             console.log(e);
             setmostrarMensaje({

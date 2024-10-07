@@ -3,7 +3,7 @@ import { Button, Divider, IconButton, Modal, Portal, Snackbar, Text, TextInput }
 import { styles } from '../../theme/styles'
 import { View } from 'react-native'
 import { push, ref, set } from 'firebase/database'
-import { database } from '../../config/firebaseConfig'
+import { auth, database } from '../../config/firebaseConfig'
 
 
 interface Props {
@@ -54,7 +54,7 @@ export const AgregarProductoComponent = ({ mostrarModalProductos, setmostratModa
         }
         console.log(formularioProductos);
         //crear la ruta a la base de datos
-        const dbRef = ref(database, 'productos')
+        const dbRef = ref(database, 'productos/'+ auth.currentUser?.uid)
         //crear una coleccion que agregue datos a la ruta
         const guardarProducto = push(dbRef)
         //almacenar los datos en la base de datos

@@ -70,6 +70,12 @@ export const styles = StyleSheet.create({
         right:15,
         backgroundColor: '#ff847c'
     },
+    fabLogOut:{
+        position:'absolute',
+        bottom:20,
+        left:15,
+        backgroundColor: '#ff847c'
+    },
     icon:{
         alignItems:'flex-end',
         flex:1

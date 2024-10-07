@@ -9,23 +9,24 @@ import { ActivityIndicator } from "react-native-paper";
 import { View } from "react-native";
 import { styles } from "../theme/styles";
 import { ActualizarInfoScreen } from "../homeScreen/ActualizarInfoScreen";
+import { DetallesScreen } from "../homeScreen/DetallesScreen";
 //interfaz para gestionar las rutas
 interface Rutas {
     name: string
     screen: () => JSX.Element
+    mostrarCabecera?:boolean
+    titulo?:string
 }
 
-//arreglos con rutas cuando el usuario no esté autenticado
-const rutasParaNoAutenticados: Rutas[] = [
+//arreglos con rutas de la app
+const rutas: Rutas[] = [
     { name: 'Login', screen: LoginScreen },
-    { name: 'Register', screen: RegistroScreen }
+    { name: 'Register', screen: RegistroScreen },
+    { name: 'Home', screen: HomeScreen },
+    { name: 'Update', screen: ActualizarInfoScreen, mostrarCabecera: true, titulo:'Actualizar información'},
+    {name: 'Detail', screen:DetallesScreen, mostrarCabecera:true, titulo:'Detalle del producto'}
 ];
 
-//arreglos con rutas cuando el usuario si está registrado
-const rutasParaSiAutenticados: Rutas[] = [
-    { name: 'Home', screen: HomeScreen },
-    { name: 'Update', screen: ActualizarInfoScreen}
-];
 const Stack = createStackNavigator();
 
 export const StackNavigator = () => {
@@ -55,20 +56,12 @@ export const StackNavigator = () => {
                     <ActivityIndicator animating={true} color="#351330" />
                 </View>
             ) : (
-                <Stack.Navigator>
+                <Stack.Navigator initialRouteName={estaAutenticado ? "Home":"Login"}>
                     {
-                        !estaAutenticado ?
-                            rutasParaNoAutenticados.map((item, index) => (
+                            rutas.map((item, index) => (
                                 <Stack.Screen key={index}
                                     name={item.name}
-                                    options={{ headerShown: false }}
-                                    component={item.screen} />
-                            ))
-                            :
-                            rutasParaSiAutenticados.map((item, index) => (
-                                <Stack.Screen key={index}
-                                    name={item.name}
-                                    options={{ headerShown: false }}
+                                    options={{ headerShown: item.mostrarCabecera ?? false, title: item.titulo }}
                                     component={item.screen} />
                             ))
                     }
